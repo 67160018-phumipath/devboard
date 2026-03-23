@@ -7,11 +7,12 @@ function Navbar() {
   return (
     <nav
       style={{
-        background: "#1e40af",
+        background: "#f97316",// แก้ ให้เป็นสีส้ม
         color: "white",
-        padding: "1rem",
+        padding: "1rem 2rem",
         display: "flex",
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <Link to="/" style={{ color: "white", textDecoration: "none" }}>
@@ -19,9 +20,9 @@ function Navbar() {
       </Link>
 
       <div style={{ display: "flex", gap: "1rem" }}>
-        <Link to="/" style={{ color: "white" }}>Home</Link>
-        <Link to="/profile" style={{ color: "white" }}>Users</Link>
-        <Link to="/favorites" style={{ color: "white" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "white" }}>Home</Link>
+        <Link to="/profile" style={{ textDecoration: "none", color: "white" }}>Users</Link>
+        <Link to="/favorites" style={{ textDecoration: "none", color: "white" }}>
           ❤️ {favorites.length}
         </Link>
       </div>
