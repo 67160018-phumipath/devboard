@@ -1,23 +1,18 @@
-import { useState } from "react";
-import CommentList  from "./CommentList";
+import { useFavorites } from "../context/FavoritesContext";
 
-export function PostCard({ post, isFavorite, onToggleFavorite }) {
-  const [show, setShow] = useState(false);
+function PostCard({ post }) {
+  const { favorites, toggleFavorite } = useFavorites();
+
+  const isFavorite = favorites.includes(post.id);
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "1rem", marginBottom: "1rem" }}>
+    <div>
       <h3>{post.title}</h3>
       <p>{post.body}</p>
 
-      <button onClick={onToggleFavorite}>
+      <button onClick={() => toggleFavorite(post.id)}>
         {isFavorite ? "❤️" : "🤍"}
       </button>
-
-      <button onClick={() => setShow(!show)}>
-        {show ? "ซ่อน" : "ดูคอมเมนต์"}
-      </button>
-
-      {show && <CommentList postId={post.id} />}
     </div>
   );
 }

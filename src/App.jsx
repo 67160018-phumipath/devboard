@@ -1,42 +1,24 @@
-import { useState } from "react";
-import PostList from "./components/PostList";
-import UserList from "./components/UserList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { FavoritesProvider } from "./context/FavoritesContext";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
+import FavoritesPage from "./pages/FavoritesPage";
+import PostDetailPage from "./pages/PostDetailPage";
 
 function App() {
-  const [favorites, setFavorites] = useState([]);
-
-  function toggle(id) {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-    );
-  }
-
   return (
-    <div>
-      <h1>DevBoard ❤️ {favorites.length}</h1>
-
-      <div
-        style={{
-          maxWidth: "900px",
-          margin: "2rem auto",
-          padding: "0 1rem",
-          display: "grid",
-          gridTemplateColumns: "2fr 1fr",
-          gap: "2rem",
-        }}
-      >
-        <div>
-          <PostList
-            favorites={favorites}
-            onToggleFavorite={toggle}
-          />
-        </div>
-
-        <div>
-          <UserList />
-        </div>
-      </div>
-    </div>
+    <FavoritesProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/posts/:id" element={<PostDetailPage />} />
+        </Routes>
+      </BrowserRouter>
+    </FavoritesProvider>
   );
 }
 
